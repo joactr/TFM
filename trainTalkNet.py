@@ -47,10 +47,12 @@ def main():
     # valLoader = torch.utils.data.DataLoader(loader, batch_size = 1, shuffle = False, num_workers = 16)
     videoDir = "C:/Users/jmmol/Desktop/COSAS V7/TFM/npz"
     audioDir = "C:/Users/jmmol/Desktop/COSAS V7/TFM/mfccs"
-    dataset = MyDataset(19,videoDir,audioDir,"trainSamples.csv")
+    datasetTrain = MyDataset(19,videoDir,audioDir,"trainSamples.csv")
+    datasetTest = MyDataset(19,videoDir,audioDir,"testSamples.csv")
     
 
-    trainLoader = DataLoader(dataset=dataset,batch_size=5,num_workers=8) #Cambiar num_workers
+    trainLoader = DataLoader(dataset=datasetTrain,batch_size=5,num_workers=12) #Cambiar num_workers
+    valLoader = DataLoader(dataset=datasetTest,batch_size=5,num_workers=12) #Cambiar num_workers
 
     if args.evaluation == True:
         download_pretrain_model_AVA()

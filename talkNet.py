@@ -58,17 +58,21 @@ class talkNet(nn.Module):
         predScores = []
         for audioFeature, visualFeature, labels in tqdm.tqdm(loader):
             with torch.no_grad():                
-                audioEmbed  = self.model.forward_audio_frontend(audioFeature[0].cuda())
-                visualEmbed = self.model.forward_visual_frontend(visualFeature[0].cuda())
+                # audioEmbed = self.model.forward_audio_frontend(audioFeature[0].cuda()) # feedForward
+                # visualEmbed = self.model.forward_visual_frontend(visualFeature[0].cuda())
+                audioEmbed = self.model.forward_audio_frontend(audioFeature.cuda()) # feedForward
+                visualEmbed = self.model.forward_visual_frontend(visualFeature.cuda())
                 audioEmbed, visualEmbed = self.model.forward_cross_attention(audioEmbed, visualEmbed)
                 outsAV= self.model.forward_audio_visual_backend(audioEmbed, visualEmbed)  
-                labels = labels[0].reshape((-1)).cuda()             
+                #labels = labels[0].reshape((-1)).cuda() # Loss
+                labels = labels.reshape((-1)).cuda() # Loss         
                 _, predScore, _, _ = self.lossAV.forward(outsAV, labels)    
                 predScore = predScore[:,1].detach().cpu().numpy()
                 predScores.extend(predScore)
         evalLines = open(evalOrig).read().splitlines()[1:]
         labels = []
-        labels = pandas.Series( ['SPEAKING_AUDIBLE' for line in evalLines])
+        #labels = pandas.Series( ['SPEAKING_AUDIBLE' for line in evalLines])
+        labels = pandas.Series( ['1' for line in evalLines])
         scores = pandas.Series(predScores)
         evalRes = pandas.read_csv(evalOrig)
         evalRes['score'] = scores
