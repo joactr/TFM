@@ -17,7 +17,7 @@ def randomNoOverlap(videoCenter, audioLen, treshold, nSideFrames):
     while True:
         index = random.randint(0, audioLen)
         overlap = False
-        if abs(videoCenter-index/4) < windowSize/(1/treshold):
+        if abs(videoCenter-index/4) < windowSize*treshold:
             overlap = True
         if not overlap:
             return index

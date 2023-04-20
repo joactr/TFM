@@ -51,8 +51,8 @@ def main():
     datasetTest = MyDataset(19,videoDir,audioDir,"testSamples.csv")
     
 
-    trainLoader = DataLoader(dataset=datasetTrain,batch_size=5,num_workers=12) #Cambiar num_workers
-    valLoader = DataLoader(dataset=datasetTest,batch_size=5,num_workers=12) #Cambiar num_workers
+    trainLoader = DataLoader(dataset=datasetTrain,batch_size=32,num_workers=12) #Cambiar num_workers
+    valLoader = DataLoader(dataset=datasetTest,batch_size=32,num_workers=12) #Cambiar num_workers
 
     if args.evaluation == True:
         download_pretrain_model_AVA()

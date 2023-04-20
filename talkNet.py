@@ -56,6 +56,7 @@ class talkNet(nn.Module):
     def evaluate_network(self, loader, evalCsvSave, evalOrig, **kwargs):
         self.eval()
         predScores = []
+        index, top1 = 0, 0
         for audioFeature, visualFeature, labels in tqdm.tqdm(loader):
             with torch.no_grad():                
                 # audioEmbed = self.model.forward_audio_frontend(audioFeature[0].cuda()) # feedForward
@@ -66,9 +67,13 @@ class talkNet(nn.Module):
                 outsAV= self.model.forward_audio_visual_backend(audioEmbed, visualEmbed)  
                 #labels = labels[0].reshape((-1)).cuda() # Loss
                 labels = labels.reshape((-1)).cuda() # Loss         
-                _, predScore, _, _ = self.lossAV.forward(outsAV, labels)    
+                _, predScore, _, prec = self.lossAV.forward(outsAV, labels)    
                 predScore = predScore[:,1].detach().cpu().numpy()
                 predScores.extend(predScore)
+                top1 += prec
+                index += len(labels)
+
+        print(100 * (top1/index))
         evalLines = open(evalOrig).read().splitlines()[1:]
         labels = []
         #labels = pandas.Series( ['SPEAKING_AUDIBLE' for line in evalLines])
