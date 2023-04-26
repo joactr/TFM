@@ -51,8 +51,8 @@ def main():
     datasetTest = MyDataset(19,videoDir,audioDir,"testSamples.csv")
     
 
-    trainLoader = DataLoader(dataset=datasetTrain,batch_size=32,num_workers=12) #Cambiar num_workers
-    valLoader = DataLoader(dataset=datasetTest,batch_size=32,num_workers=12) #Cambiar num_workers
+    trainLoader = DataLoader(dataset=datasetTrain,shuffle=True,batch_size=32,num_workers=12) #Cambiar num_workers
+    valLoader = DataLoader(dataset=datasetTest,shuffle=False,batch_size=32,num_workers=12) #Cambiar num_workers
 
     if args.evaluation == True:
         download_pretrain_model_AVA()
@@ -60,7 +60,7 @@ def main():
         s.loadParameters('pretrain_AVA.model')
         print("Model %s loaded from previous state!"%('pretrain_AVA.model'))
         mAP = s.evaluate_network(loader = valLoader, **vars(args))
-        print("mAP %2.2f%%"%(mAP))
+        print("Precision en val: %2.2f%%"%(mAP))
         quit()
 
     modelfiles = glob.glob('%s/model_0*.model'%args.modelSavePath)
