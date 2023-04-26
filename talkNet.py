@@ -73,21 +73,23 @@ class talkNet(nn.Module):
                 top1 += prec
                 index += len(labels)
 
-        print(100 * (top1/index))
-        evalLines = open(evalOrig).read().splitlines()[1:]
-        labels = []
-        #labels = pandas.Series( ['SPEAKING_AUDIBLE' for line in evalLines])
-        labels = pandas.Series( ['1' for line in evalLines])
-        scores = pandas.Series(predScores)
-        evalRes = pandas.read_csv(evalOrig)
-        evalRes['score'] = scores
-        evalRes['label'] = labels
-        evalRes.drop(['label_id'], axis=1,inplace=True)
-        evalRes.drop(['instance_id'], axis=1,inplace=True)
-        evalRes.to_csv(evalCsvSave, index=False)
-        cmd = "python -O utils/get_ava_active_speaker_performance.py -g %s -p %s "%(evalOrig, evalCsvSave)
-        mAP = float(str(subprocess.run(cmd, shell=True, capture_output =True).stdout).split(' ')[2][:5])
-        return mAP
+
+        precision_eval = 100 * (top1/index)
+        print(precision_eval)
+        # evalLines = open(evalOrig).read().splitlines()[1:]
+        # labels = []
+        # #labels = pandas.Series( ['SPEAKING_AUDIBLE' for line in evalLines])
+        # labels = pandas.Series( ['1' for line in evalLines])
+        # scores = pandas.Series(predScores)
+        # evalRes = pandas.read_csv(evalOrig)
+        # evalRes['score'] = scores
+        # evalRes['label'] = labels
+        # evalRes.drop(['label_id'], axis=1,inplace=True)
+        # evalRes.drop(['instance_id'], axis=1,inplace=True)
+        # evalRes.to_csv(evalCsvSave, index=False)
+        # cmd = "python -O utils/get_ava_active_speaker_performance.py -g %s -p %s "%(evalOrig, evalCsvSave)
+        # mAP = float(str(subprocess.run(cmd, shell=True, capture_output =True).stdout).split(' ')[2][:5])
+        return precision_eval
 
     def saveParameters(self, path):
         torch.save(self.state_dict(), path)

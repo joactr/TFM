@@ -1,33 +1,61 @@
 import os
 import random
-import torchaudio
 import torch
 import numpy as np
 import pandas as pd
-from torch.utils.data import Dataset, DataLoader
+from torch.utils.data import Dataset
 import torch.nn.functional as F
 import cv2
-from tqdm import tqdm
-def randomNoOverlap(videoCenter, audioLen, treshold, nSideFrames):
+from math import floor,ceil
+
+
+def randomNoOverlap(videoCenter, videoLen, treshold, nSideFrames):
     """
-    Threshold entre 0 y 1, porcentaje maximo de overlap permitido
-    No funciona para muestras muy pequeñas, echar ojo
+    Busca un índice donde poder meter el centro de una ventana de audio
+    sin solapar con la de vídeo existente, devuelve el índice del centro
+    de la ventana, o centro de padding mínimo en caso de no existir índice 
+    en el que no se solapen.
+    Params:
+        videoCenter: Índice del array del centro de la ventana de la muestra
+        videoLen: Longitud del vídeo
+        Threshold: Valor entre 0 y 1, porcentaje maximo de solapamiento permitido
+        nSideFrames: Número de frames pertenecientes a cada lado de la ventana
+    Returns:
+        index: Centro de la ventana
     """
     windowSize = nSideFrames*2+1
-    while True:
-        index = random.randint(0, audioLen)
+    fitsStart,fitsEnd = True, True
+    
+    overlapLeft = 1-max(abs(videoCenter-0),0)/windowSize
+    overlapRight = 1-max(abs(videoCenter-videoLen),0)/windowSize
+    print(overlapLeft*windowSize,overlapRight)
+
+    if overlapLeft > treshold:
+        fitsStart = False
+    if overlapRight > treshold:
+        fitsEnd = False
+        
+    if not fitsStart and not fitsEnd:
+        minPaddingLeft = floor(videoCenter-(treshold*(windowSize)))
+        minPaddingRight = ceil(videoCenter+(treshold*(windowSize)))
+        return random.choice([minPaddingLeft,minPaddingRight])
+    
+    overlap = True
+    while overlap:
+        index = random.randint(0, videoLen)
         overlap = False
-        if abs(videoCenter-index/4) < windowSize*treshold:
+        if 1-max(abs(videoCenter-index),0)/windowSize > treshold:
             overlap = True
         if not overlap:
-            return index
+           return index*4 #Para audio se alinea cuatro frames por cada uno de video
 
 class MyDataset(Dataset):
 
     def __init__(self, nframes, video_dir, audio_dir, csv_path):
         """
-            nframes: descartamos videos que superen dicho nº de frames
+            nframes: tamaño de la ventana
             video_dir: directorio donde se encuentran almacenados los videos
+            audio_dir: directorio donde se encuentran almacenados los audios
             csv_path: fichero csv que define una partición
         """
         self.nframes = nframes
@@ -108,7 +136,7 @@ class MyDataset(Dataset):
             center = center*4
         if label == 0: #Muestra negativa
             if audioID == videoID: #Audio desfasado
-                center = randomNoOverlap(center, audioFrames, 0.5, self.nSideFrames)
+                center = randomNoOverlap(center, int(audioFrames/4), 0.5, self.nSideFrames)
             else:
                 center = random.randint(0,len(audio))
         ini = center-self.nSideFramesAudio
