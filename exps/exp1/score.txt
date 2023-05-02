@@ -1,0 +1,2 @@
+2 epoch, LR 0.000095, LOSS 0.650217, mAP 79.57%, bestmAP 79.57%
+3 epoch, LR 0.000090, LOSS 0.362247, mAP 85.20%, bestmAP 85.20%

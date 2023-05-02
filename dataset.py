@@ -28,7 +28,7 @@ def randomNoOverlap(videoCenter, videoLen, treshold, nSideFrames):
     
     overlapLeft = 1-max(abs(videoCenter-0),0)/windowSize
     overlapRight = 1-max(abs(videoCenter-videoLen),0)/windowSize
-    print(overlapLeft*windowSize,overlapRight)
+    #print(overlapLeft*windowSize,overlapRight)
 
     if overlapLeft > treshold:
         fitsStart = False

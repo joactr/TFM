@@ -39,7 +39,6 @@ class talkNetModel(nn.Module):
         return x
 
     def forward_audio_frontend(self, x):    
-        print(x.shape)
         x = x.unsqueeze(1).transpose(2, 3)        
         x = self.audioEncoder(x)
         return x
