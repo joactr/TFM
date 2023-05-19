@@ -51,14 +51,14 @@ def randomNoOverlap(videoCenter, videoLen, treshold, nSideFrames):
 
 class MyDataset(Dataset):
 
-    def __init__(self, nframes, video_dir, audio_dir, csv_path):
+    def __init__(self, nframes, video_dir, audio_dir, csv_path): #, frameInterval=False, batchSize=32):
         """
             nframes: tamaño de la ventana
             video_dir: directorio donde se encuentran almacenados los videos
             audio_dir: directorio donde se encuentran almacenados los audios
             csv_path: fichero csv que define una partición
         """
-        self.nframes = nframes
+        
         self.video_dir = video_dir
         self.audio_dir = audio_dir
 
@@ -70,8 +70,14 @@ class MyDataset(Dataset):
         self.audioIDs = samples_data["audio"].tolist()
         self.labels = samples_data["label"].tolist()
         self.centers = samples_data["center"].tolist()
+
+        #if frameInterval:
+        #    pass
+        self.nframes = nframes
         self.nSideFrames = int((self.nframes-1)/2)
         self.nSideFramesAudio = self.nSideFrames*4
+
+
         print(self.nSideFrames,self.nSideFramesAudio)
         #TESTING
         self.ini = 0

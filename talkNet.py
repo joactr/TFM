@@ -24,19 +24,14 @@ class talkNet(nn.Module):
         index, top1, loss = 0, 0, 0
         lr = self.optim.param_groups[0]['lr']        
         for num, (audioFeature, visualFeature, labels) in enumerate(loader, start=1):
-            #print("si",num, (audioFeature.shape, visualFeature.shape, labels.shape))
             self.zero_grad()
-            # audioEmbed = self.model.forward_audio_frontend(audioFeature[0].cuda()) # feedForward
-            # visualEmbed = self.model.forward_visual_frontend(visualFeature[0].cuda())
             audioEmbed = self.model.forward_audio_frontend(audioFeature.cuda()) # feedForward
             visualEmbed = self.model.forward_visual_frontend(visualFeature.cuda())
             audioEmbed, visualEmbed = self.model.forward_cross_attention(audioEmbed, visualEmbed)
             outsAV= self.model.forward_audio_visual_backend(audioEmbed, visualEmbed)  
             outsA = self.model.forward_audio_backend(audioEmbed)
             outsV = self.model.forward_visual_backend(visualEmbed)
-            #labels = labels[0].reshape((-1)).cuda() # Loss
             labels = labels.reshape((-1)).cuda() # Loss
-            #print(outsAV,labels)
             nlossAV, _, _, prec = self.lossAV.forward(outsAV, labels)
             nlossA = self.lossA.forward(outsA, labels)
             nlossV = self.lossV.forward(outsV, labels)
@@ -49,47 +44,36 @@ class talkNet(nn.Module):
             sys.stderr.write(time.strftime("%m-%d %H:%M:%S") + \
             " [%2d] Lr: %5f, Training: %.2f%%, "    %(epoch, lr, 100 * (num / loader.__len__())) + \
             " Loss: %.5f, ACC: %2.2f%% \r"        %(loss/(num), 100 * (top1/index)))
-            sys.stderr.flush()  
-        sys.stdout.write("\n")      
+            sys.stderr.flush()
+        sys.stdout.write("\n")
         return loss/num, lr
 
-    def evaluate_network(self, loader, evalCsvSave, evalOrig, **kwargs):
+    def evaluate_network(self, loader, **kwargs):
         self.eval()
         predScores = []
-        index, top1 = 0, 0
-        for audioFeature, visualFeature, labels in tqdm.tqdm(loader):
+        index, top1, loss = 0, 0, 0
+        for num, (audioFeature, visualFeature, labels) in enumerate(tqdm.tqdm(loader)):
             with torch.no_grad():                
-                # audioEmbed = self.model.forward_audio_frontend(audioFeature[0].cuda()) # feedForward
-                # visualEmbed = self.model.forward_visual_frontend(visualFeature[0].cuda())
                 audioEmbed = self.model.forward_audio_frontend(audioFeature.cuda()) # feedForward
                 visualEmbed = self.model.forward_visual_frontend(visualFeature.cuda())
                 audioEmbed, visualEmbed = self.model.forward_cross_attention(audioEmbed, visualEmbed)
                 outsAV= self.model.forward_audio_visual_backend(audioEmbed, visualEmbed)  
-                #labels = labels[0].reshape((-1)).cuda() # Loss
+                outsA = self.model.forward_audio_backend(audioEmbed)
+                outsV = self.model.forward_visual_backend(visualEmbed)
                 labels = labels.reshape((-1)).cuda() # Loss         
-                _, predScore, _, prec = self.lossAV.forward(outsAV, labels)    
+                nlossAV, predScore, _, prec = self.lossAV.forward(outsAV, labels)    
+                nlossA = self.lossA.forward(outsA, labels)
+                nlossV = self.lossV.forward(outsV, labels)
+                nloss = nlossAV + 0.4 * nlossA + 0.4 * nlossV
+                loss += nloss.detach().cpu().numpy()
                 predScore = predScore[:,1].detach().cpu().numpy()
                 predScores.extend(predScore)
                 top1 += prec
                 index += len(labels)
 
-
         precision_eval = 100 * (top1/index)
         print(precision_eval)
-        # evalLines = open(evalOrig).read().splitlines()[1:]
-        # labels = []
-        # #labels = pandas.Series( ['SPEAKING_AUDIBLE' for line in evalLines])
-        # labels = pandas.Series( ['1' for line in evalLines])
-        # scores = pandas.Series(predScores)
-        # evalRes = pandas.read_csv(evalOrig)
-        # evalRes['score'] = scores
-        # evalRes['label'] = labels
-        # evalRes.drop(['label_id'], axis=1,inplace=True)
-        # evalRes.drop(['instance_id'], axis=1,inplace=True)
-        # evalRes.to_csv(evalCsvSave, index=False)
-        # cmd = "python -O utils/get_ava_active_speaker_performance.py -g %s -p %s "%(evalOrig, evalCsvSave)
-        # mAP = float(str(subprocess.run(cmd, shell=True, capture_output =True).stdout).split(' ')[2][:5])
-        return precision_eval
+        return loss/num, precision_eval
 
     def saveParameters(self, path):
         torch.save(self.state_dict(), path)
