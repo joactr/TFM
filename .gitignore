@@ -1,4 +1,6 @@
 imgs/
 mfccs/
 npz/
+exps/
 *.bat
+*.wav
