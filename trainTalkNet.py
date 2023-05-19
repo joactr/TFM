@@ -54,7 +54,7 @@ def main():
 
     if args.evaluation == True:
         s = talkNet(**vars(args))
-        s.loadParameters(r'C:\Users\jmmol\Desktop\COSAS V7\TFM\exps\exp1\model\model_0010.model')
+        s.loadParameters(r'C:\Users\jmmol\Desktop\COSAS V7\TFM\exps\exp2\model\model_0006.model')
         print("Model %s loaded from previous state!"%('pretrain_AVA.model'))
         testLoss,mAP = s.evaluate_network(loader = valLoader, **vars(args))
         print("Precision en val: %2.2f%%, y loss %f"%(mAP, testLoss))

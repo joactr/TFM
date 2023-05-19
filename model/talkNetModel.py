@@ -61,4 +61,3 @@ class talkNetModel(nn.Module):
     def forward_visual_backend(self,x):
         x = torch.reshape(x, (-1, 128))
         return x
-

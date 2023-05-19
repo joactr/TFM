@@ -18,12 +18,28 @@ class talkNet(nn.Module):
         self.scheduler = torch.optim.lr_scheduler.StepLR(self.optim, step_size = 1, gamma=lrDecay)
         print(time.strftime("%m-%d %H:%M:%S") + " Model para number = %.2f"%(sum(param.numel() for param in self.model.parameters()) / 1024 / 1024))
 
+    def forward(self,x):
+        with torch.no_grad():
+            audioFeature, visualFeature = x
+            print(audioFeature.shape,visualFeature.shape)
+
+            audioEmbed = self.model.forward_audio_frontend(audioFeature.cuda()) # feedForward
+            visualEmbed = self.model.forward_visual_frontend(visualFeature.cuda())
+            audioEmbed, visualEmbed = self.model.forward_cross_attention(audioEmbed, visualEmbed)
+            outsAV= self.model.forward_audio_visual_backend(audioEmbed, visualEmbed)  
+            preds = self.lossAV.forward(outsAV)    
+
+
+
+        return preds
+
     def train_network(self, loader, epoch, **kwargs):
         self.train()
         self.scheduler.step(epoch - 1)
         index, top1, loss = 0, 0, 0
         lr = self.optim.param_groups[0]['lr']        
         for num, (audioFeature, visualFeature, labels) in enumerate(loader, start=1):
+            print(audioFeature.shape,visualFeature.shape)
             self.zero_grad()
             audioEmbed = self.model.forward_audio_frontend(audioFeature.cuda()) # feedForward
             visualEmbed = self.model.forward_visual_frontend(visualFeature.cuda())
@@ -74,6 +90,7 @@ class talkNet(nn.Module):
         precision_eval = 100 * (top1/index)
         print(precision_eval)
         return loss/num, precision_eval
+
 
     def saveParameters(self, path):
         torch.save(self.state_dict(), path)
