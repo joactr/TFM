@@ -12,15 +12,15 @@ def main():
 
     parser = argparse.ArgumentParser(description = "TalkNet Training")
     # Training details
-    parser.add_argument('--lr',           type=float, default=0.0002,help='Learning rate')
+    parser.add_argument('--lr',           type=float, default=0.000004,help='Learning rate')
     parser.add_argument('--lrDecay',      type=float, default=0.95,  help='Learning rate decay rate')
-    parser.add_argument('--maxEpoch',     type=int,   default=6,    help='Maximum number of epochs')
+    parser.add_argument('--maxEpoch',     type=int,   default=20,    help='Maximum number of epochs')
     parser.add_argument('--testInterval', type=int,   default=1,     help='Test and save every [testInterval] epochs')
     parser.add_argument('--batchSize',    type=int,   default=2500,  help='Dynamic batch size, default is 2500 frames, other batchsize (such as 1500) will not affect the performance')
-    parser.add_argument('--windowSize',      type=float, default=7,  help='Number of frames of input winfow')
+    parser.add_argument('--windowSize',      type=float, default=21,  help='Number of frames of input winfow')
     parser.add_argument('--nDataLoaderThread', type=int, default=4,  help='Number of loader threads')
     # Data path
-    parser.add_argument('--savePath',     type=str, default="exps/exp2")
+    parser.add_argument('--savePath',     type=str, default="exps/exp1")
     # Data selection
     parser.add_argument('--evalDataType', type=str, default="val", help='Only for AVA, to choose the dataset for evaluation, val or test')
     parser.add_argument('--evaluation',      dest='evaluation', action='store_true', help='Only do evaluation by using pretrained model [pretrain_AVA.model]')
@@ -47,8 +47,8 @@ def main():
     datasetTest = MyDataset(int(args.windowSize),videoDir,audioDir,"testSamples.csv")
     
 
-    trainLoader = DataLoader(dataset=datasetTrain,shuffle=True,batch_size=32,num_workers=12) #Cambiar num_workers
-    valLoader = DataLoader(dataset=datasetTest,shuffle=False,batch_size=32,num_workers=12) #Cambiar num_workers
+    trainLoader = DataLoader(dataset=datasetTrain,shuffle=True,batch_size=32,num_workers=14) #Cambiar num_workers
+    valLoader = DataLoader(dataset=datasetTest,shuffle=False,batch_size=32,num_workers=14) #Cambiar num_workers
     lr_ini = args.lr
     total_epoch = args.maxEpoch
 
@@ -78,7 +78,7 @@ def main():
         loss, lr = s.train_network(epoch = epoch, loader = trainLoader, **vars(args))
         
         if epoch % args.testInterval == 0:        
-            s.saveParameters(args.savePath+"/model/model_%04d.model"%epoch)
+            s.saveParameters(args.savePath+"/model/model%d_%04d.model"%(int(args.windowSize),epoch))
             testLoss, testmap = s.evaluate_network(epoch = epoch, loader = valLoader, **vars(args))
             mAPs.append(testmap)
             print(time.strftime("%Y-%m-%d %H:%M:%S"), "%d epoch, mAP %2.2f%%, bestmAP %2.2f%%"%(epoch, mAPs[-1], max(mAPs)))

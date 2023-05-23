@@ -12,12 +12,9 @@ class lossAV(nn.Module):
 		x = x.squeeze(1)
 		x = self.FC(x)
 		if labels == None:
-			labels = torch.LongTensor([1 for i in range(7)]).cuda()
-			nloss = self.criterion(x, labels)
 			predScore = F.softmax(x, dim = -1)
 			predLabel = torch.round(F.softmax(x, dim = -1))[:,1]
-			correctNum = (predLabel == labels).sum().float()
-			return nloss, predScore, predLabel, correctNum
+			return predScore, predLabel
 		else:
 			nloss = self.criterion(x, labels)
 			predScore = F.softmax(x, dim = -1)

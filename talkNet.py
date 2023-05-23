@@ -21,7 +21,7 @@ class talkNet(nn.Module):
     def forward(self,x):
         with torch.no_grad():
             audioFeature, visualFeature = x
-            print(audioFeature.shape,visualFeature.shape)
+            #print(audioFeature.shape,visualFeature.shape)
 
             audioEmbed = self.model.forward_audio_frontend(audioFeature.cuda()) # feedForward
             visualEmbed = self.model.forward_visual_frontend(visualFeature.cuda())
@@ -39,7 +39,7 @@ class talkNet(nn.Module):
         index, top1, loss = 0, 0, 0
         lr = self.optim.param_groups[0]['lr']        
         for num, (audioFeature, visualFeature, labels) in enumerate(loader, start=1):
-            print(audioFeature.shape,visualFeature.shape)
+            #print(audioFeature.shape,visualFeature.shape)
             self.zero_grad()
             audioEmbed = self.model.forward_audio_frontend(audioFeature.cuda()) # feedForward
             visualEmbed = self.model.forward_visual_frontend(visualFeature.cuda())
