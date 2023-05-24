@@ -39,7 +39,7 @@ def extractBiggestFace(img,detector):
         xmin,ymin,xmax,ymax = int(cntr[0]),int(cntr[1]),int(cntr[2]),int(cntr[3])
         resImage = cv2.resize(img[max(ymin,0):ymax, xmin:xmax], (112, 112)) #Cara detectada, reescalamos
         resImage = cv2.cvtColor(resImage, cv2.COLOR_BGR2GRAY)
-        return resImage
+        return resImage, (xmin,ymin,xmax,ymax)
     except:
         print(cntr)
         cv2.imshow('image',img)
@@ -50,11 +50,14 @@ def saveFaceCrops(videoPath,detector):
     success,image = vidcap.read()
     count = 0
     faceArray = []
+    facePos = []
     while success:
-        faceArray.append(extractBiggestFace(image,detector)) #DE MOMENTO SIEMPRE HAY CARA
+        resImage, (xmin,ymin,xmax,ymax) = extractBiggestFace(image,detector)
+        facePos.append((xmin,ymin,xmax,ymax))
+        faceArray.append(resImage) #DE MOMENTO SIEMPRE HAY CARA
         success,image = vidcap.read()
         count += 1
-    return faceArray #Devuelve número de frames
+    return faceArray,facePos #Devuelve número de frames
 
 def checkVideoDuration(videoPath):
     res = subprocess.check_output(["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "default=noprint_wrappers=1:nokey=1", videoPath])
@@ -119,7 +122,7 @@ def padVideo(video, center, nframes):
     nSideFrames = int((nframes-1)/2)
     video = torch.FloatTensor(video)
     videoFrames = video.shape[0]
-    print(videoFrames)
+    #print(videoFrames)
     ini = center-nSideFrames
     fin = center+nSideFrames+1
     if center < nSideFrames: #Necesitamos hacer padding por la izquierda
@@ -145,7 +148,7 @@ def padAudio(audio, label, center,nframes,videoFrames):
     nSideFramesAudio = nSideFrames*4
     audio = torch.FloatTensor(audio)
     audioFrames = audio.shape[0]
-    print(audioFrames)
+    #print(audioFrames)
     if label == 1: #Muestra positiva
         center = center*4
     if label == 0: #Muestra negativa
