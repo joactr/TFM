@@ -6,6 +6,7 @@ import torch
 import torch.nn.functional as F
 import random
 import numpy as np
+from collections import defaultdict
 
 
 def convert_video_to_audio_ffmpeg(video_file, output_ext="wav"):
@@ -45,6 +46,28 @@ def extractBiggestFace(img,detector):
         cv2.imshow('image',img)
         cv2.waitKey(0)
 
+def extractFaces(img,detector):
+    """
+    Detecta todas las caras de una imagen y devuelve la más grande recortada y reescalada a 112x112
+    """
+    detections = detector.detect(img)
+    idx_max = -1
+    area_max = -1
+    faces = []
+    faceCoords = []
+    try:
+        for i,cntr in enumerate(detections):
+            xmin,ymin,xmax,ymax = int(cntr[0]),int(cntr[1]),int(cntr[2]),int(cntr[3]) #Guardamos bounding box
+            resImage = cv2.resize(img[max(ymin,0):ymax, xmin:xmax], (112, 112)) #Cara detectada, reescalamos
+            resImage = cv2.cvtColor(resImage, cv2.COLOR_BGR2GRAY)
+            faces.append(resImage)
+            faceCoords.append((xmin,ymin,xmax,ymax))
+        return faces, faceCoords
+    except:
+        print(cntr)
+        cv2.imshow('image',img)
+        cv2.waitKey(0)
+
 def saveFaceCrops(videoPath,detector):
     vidcap = cv2.VideoCapture(videoPath)
     success,image = vidcap.read()
@@ -58,6 +81,40 @@ def saveFaceCrops(videoPath,detector):
         success,image = vidcap.read()
         count += 1
     return faceArray,facePos #Devuelve número de frames
+
+def saveMultiFace(videoPath,detector):
+    vidcap = cv2.VideoCapture(videoPath)
+    success,image = vidcap.read()
+    count = 0
+    faceArray = defaultdict(list)
+    facePos = defaultdict(list)
+    frames = defaultdict(list)
+    while success:
+        faces, faceCoords = extractFaces(image,detector)
+        if count == 0: #No hay caras aún
+            for d in range(len(faces)):
+                faceArray[d].append(faces[d])
+                facePos[d].append(faceCoords[d])
+                frames[d] = [0]
+        else: #Vamos a comparar a qué cara pertenece según posición (implementar threshold por si nueva cara)
+            for f in range(len(faces)):
+                minDist = 2**32
+                predFace = -1
+                for key in facePos.keys():
+                    res = np.linalg.norm(np.asarray(faceCoords[f])-np.asarray(facePos[key][-1]))
+                    #print(facePos[f],facePos[key][-1])
+                    #print(f"{f} = {key}",res)
+                    if res < minDist:
+                        predFace = key
+                        minDist = res
+                faceArray[predFace].append(faces[f])
+                facePos[predFace].append(faceCoords[f])
+                frames[predFace].append(count)
+                
+
+        success,image = vidcap.read()
+        count += 1
+    return faceArray,facePos,frames #Devuelve número de frames
 
 def checkVideoDuration(videoPath):
     res = subprocess.check_output(["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "default=noprint_wrappers=1:nokey=1", videoPath])
