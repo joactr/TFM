@@ -82,7 +82,7 @@ def saveFaceCrops(videoPath,detector):
         count += 1
     return faceArray,facePos #Devuelve número de frames
 
-def saveMultiFace(videoPath,detector):
+def saveMultiFace(videoPath,detector,maxDistance):
     vidcap = cv2.VideoCapture(videoPath)
     success,image = vidcap.read()
     count = 0
@@ -107,6 +107,8 @@ def saveMultiFace(videoPath,detector):
                     if res < minDist:
                         predFace = key
                         minDist = res
+                    if minDist > maxDistance: 
+                        predFace = len(facePos.keys())
                 faceArray[predFace].append(faces[f])
                 facePos[predFace].append(faceCoords[f])
                 frames[predFace].append(count)
