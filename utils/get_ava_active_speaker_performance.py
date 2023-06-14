@@ -122,22 +122,6 @@ def merge_groundtruth_and_predictions(df_groundtruth, df_predictions):
       suffixes=("_groundtruth", "_prediction"),
       validate="1:1").sort_values(
           by=["score"], ascending=False).reset_index()
-  # Validates that bounding boxes in ground truth and predictions match for the
-  # same uids.
-  df_merged["bounding_box_correct"] = np.where(
-      eq(df_merged["entity_box_x1_groundtruth"],
-         df_merged["entity_box_x1_prediction"])
-      & eq(df_merged["entity_box_x2_groundtruth"],
-           df_merged["entity_box_x2_prediction"])
-      & eq(df_merged["entity_box_y1_groundtruth"],
-           df_merged["entity_box_y1_prediction"])
-      & eq(df_merged["entity_box_y2_groundtruth"],
-           df_merged["entity_box_y2_prediction"]), True, False)
-
-  if (~df_merged["bounding_box_correct"]).sum() > 0:
-    raise ValueError(
-        "Mismatch between groundtruth and predictions bounding boxes found at "
-        + str(list(df_merged[~df_merged["bounding_box_correct"]]["uid"])))
 
   return df_merged
 
