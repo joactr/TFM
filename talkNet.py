@@ -27,11 +27,11 @@ class talkNet(nn.Module):
             visualEmbed = self.model.forward_visual_frontend(visualFeature.cuda())
             audioEmbed, visualEmbed = self.model.forward_cross_attention(audioEmbed, visualEmbed)
             outsAV= self.model.forward_audio_visual_backend(audioEmbed, visualEmbed)  
-            preds = self.lossAV.forward(outsAV)    
+            scores,labels = self.lossAV.forward(outsAV)  # returns scores,labels  
 
 
 
-        return preds
+        return scores,labels
 
     def train_network(self, loader, epoch, **kwargs):
         self.train()
