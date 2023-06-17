@@ -3,6 +3,10 @@ import tkinter.messagebox
 import customtkinter
 from tkvideo import tkvideo
 import vlc
+import pandas as pd
+import cv2
+import pickle
+import subprocess
 
 customtkinter.set_appearance_mode("System")  # Modes: "System" (standard), "Dark", "Light"
 customtkinter.set_default_color_theme("blue")  # Themes: "blue" (standard), "green", "dark-blue"
@@ -32,11 +36,72 @@ class Screen(tk.Frame):
         
         self.player.set_hwnd(self.winfo_id())
         self.player.play()
+    
+    def stop(self):
+        self.player.stop()
+
+
+class Loader():
+    def __init__(self):
+        self.df = pd.read_csv("outputs/res.csv")
+        self.index = 0
+        self.createVideo()
+
+    def createVideo(self):
+        row = self.df.iloc[self.index]
+        speakerN = row["speaker"]
+        with open(row["dataPath"], 'rb') as f:  # open a text file
+            loaded = pickle.load(f) # serialize the list
+        facePos = loaded["facePos"][speakerN]
+        videoPath = row["video"]
+
+        cap = cv2.VideoCapture(videoPath)
+        videoImages = []
+        width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
+        height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
+        iniFrame = int(row["ini"]*25)
+        frameN = iniFrame
+        finalFrame = int(row["end"]*25)
+        cap.set(cv2.CAP_PROP_POS_FRAMES, frameN-1)
+
+        print(frameN, finalFrame)
+        while frameN < finalFrame:
+            ret, image = cap.read()
+            videoImages.append(image)
+            frameN+=1
+            if ret == False:
+                break
+
+        for i, fr in enumerate(range(iniFrame, finalFrame)): #Para cada frame en el que aparezca la cara
+            try:
+                color = (0,255,0)
+                xmin,ymin,xmax,ymax = facePos[fr]
+                videoImages[i] = cv2.rectangle(videoImages[i], (xmin,ymin), (xmax,ymax),color , 1)     
+            except Exception as e :
+                pass
+
+        command = ["ffmpeg","-y","-i",str(videoPath),"-ss",str(row["ini"]),"-to",str(row["end"]),"-q:a","0","-map", "a", "temp.wav"]
+        subprocess.call(command)
+
+        self.saveTrimmedVideo(videoImages,width,height)
+
+    def saveTrimmedVideo(self,imgFrames,width,height):
+        print(len(imgFrames))
+        print("si")
+        video = cv2.VideoWriter("temp.mp4", cv2.VideoWriter_fourcc(*'mp4v'), 25, (width,height))
+        print("si")
+        for image in imgFrames:
+            video.write(image)
+        cv2.destroyAllWindows()
+        video.release()
+        res = subprocess.call(["ffmpeg","-y","-i","temp.mp4","-i","temp.wav","-map","0:v","-map","1:a", "-c:v", "copy", "-shortest","temp2.mp4"])
 
 
 class App(customtkinter.CTk):
     def __init__(self):
         super().__init__()
+
+        self.loader = Loader()
 
         # configure window
         self.title("CREAR ESTO ME HA HECHO ENVEJECER 54 AÑOS")
@@ -52,9 +117,10 @@ class App(customtkinter.CTk):
         self.videoHolder.grid(row=0, column=1, padx=20, pady=(10, 10),sticky="nsew",rowspan=4)
         # Init vlc player
         self.player = Screen(self.videoHolder)
+        
         self.player.place(relx=0.0005, rely=0, relwidth=0.999, relheight=1)
-        self.player.play('dos_personas_hablando_por_turnos.mp4')
-
+        self.player.play('temp2.mp4')
+        
 
 
         self.save_button = customtkinter.CTkButton(master=self, fg_color="transparent", border_width=2, text_color=("gray10", "#DCE4EE"), text="Save",command=self.saveSample)
@@ -72,15 +138,20 @@ class App(customtkinter.CTk):
 
         # set default values
         #self.appearance_mode_optionemenu.set("Dark")
-        self.textbox.insert("0.0", "---Video transcription---")
+        #self.textbox.insert("0.0", "---Video transcription---")
+        self.textbox.insert("0.0", self.loader.df.iloc[self.loader.index]["transcription"])
 
     def change_appearance_mode_event(self, new_appearance_mode: str):
         customtkinter.set_appearance_mode(new_appearance_mode)
 
     def saveSample(self):
+        self.player.stop()
+        print(self.textbox.get("0.0","end"))
         self.textbox.delete("0.0","end")
-        self.textbox.insert("0.0", "TEST")
-        self.player.play('dos_personas_hablando_por_turnos.mp4')
+        self.loader.index += 1
+        self.loader.createVideo()
+        self.textbox.insert("0.0", self.loader.df.iloc[self.loader.index]["transcription"])
+        self.player.play('temp2.mp4')
 
 
 
