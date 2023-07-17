@@ -1,7 +1,7 @@
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-
+import pandas as pd
 import sys, time, numpy, os, subprocess, pandas, tqdm
 
 from loss import lossAV, lossA, lossV
@@ -66,7 +66,8 @@ class talkNet(nn.Module):
 
     def evaluate_network(self, loader, **kwargs):
         self.eval()
-        predScores = []
+        windowSize = kwargs.get('windowSize',24)
+        predScores, predLabels = [], []
         index, top1, loss = 0, 0, 0
         for num, (audioFeature, visualFeature, labels) in enumerate(tqdm.tqdm(loader)):
             with torch.no_grad():                
@@ -77,19 +78,30 @@ class talkNet(nn.Module):
                 outsA = self.model.forward_audio_backend(audioEmbed)
                 outsV = self.model.forward_visual_backend(visualEmbed)
                 labels = labels.reshape((-1)).cuda() # Loss         
-                nlossAV, predScore, _, prec = self.lossAV.forward(outsAV, labels)    
+                nlossAV, predScore, predLabel, prec = self.lossAV.forward(outsAV, labels)    
                 nlossA = self.lossA.forward(outsA, labels)
                 nlossV = self.lossV.forward(outsV, labels)
                 nloss = nlossAV + 0.4 * nlossA + 0.4 * nlossV
                 loss += nloss.detach().cpu().numpy()
                 predScore = predScore[:,1].detach().cpu().numpy()
                 predScores.extend(predScore)
+                predLabels.extend(predLabel.detach().cpu().numpy().astype(int))
                 top1 += prec
                 index += len(labels)
 
         precision_eval = 100 * (top1/index)
-        print(precision_eval)
-        return loss/num, precision_eval
+        print("TESTACC:",precision_eval)
+
+        df = pd.read_csv("testSamples.csv")
+        df = df.loc[df.index.repeat(windowSize)].reset_index(drop=True)
+        df["pred"] = predLabels
+        df["posScore"] = predScores
+        df.index.name = 'uid'
+        df.to_csv("testPreds.csv")
+
+        cmd = "python -O get_map.py -p testPreds.csv"
+        mAP = float(str(subprocess.check_output(cmd)).split(' ')[2][:5])
+        return loss/num, precision_eval, mAP
 
 
     def saveParameters(self, path):

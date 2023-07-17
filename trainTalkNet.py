@@ -14,10 +14,10 @@ def main():
     # Training details
     parser.add_argument('--lr',           type=float, default=0.000004,help='Learning rate')
     parser.add_argument('--lrDecay',      type=float, default=0.95,  help='Learning rate decay rate')
-    parser.add_argument('--maxEpoch',     type=int,   default=20,    help='Maximum number of epochs')
+    parser.add_argument('--maxEpoch',     type=int,   default=10,    help='Maximum number of epochs')
     parser.add_argument('--testInterval', type=int,   default=1,     help='Test and save every [testInterval] epochs')
     parser.add_argument('--batchSize',    type=int,   default=2500,  help='Dynamic batch size, default is 2500 frames, other batchsize (such as 1500) will not affect the performance')
-    parser.add_argument('--windowSize',      type=float, default=21,  help='Number of frames of input winfow')
+    parser.add_argument('--windowSize',      type=float, default=25,  help='Number of frames of input winfow')
     parser.add_argument('--nDataLoaderThread', type=int, default=4,  help='Number of loader threads')
     # Data path
     parser.add_argument('--savePath',     type=str, default="exps/exp1")
@@ -79,13 +79,15 @@ def main():
         
         if epoch % args.testInterval == 0:        
             s.saveParameters(args.savePath+"/model/model%d_%04d.model"%(int(args.windowSize),epoch))
-            testLoss, testmap = s.evaluate_network(epoch = epoch, loader = valLoader, **vars(args))
+            testLoss, testACC, testmap = s.evaluate_network(epoch = epoch, loader = valLoader, **vars(args))
             mAPs.append(testmap)
             print(time.strftime("%Y-%m-%d %H:%M:%S"), "%d epoch, mAP %2.2f%%, bestmAP %2.2f%%"%(epoch, mAPs[-1], max(mAPs)))
-            scoreFile.write("epoch %d, %d total epochs, LR %f, TRAINLOSS %f, TESTLOSS %f, testmAP %2.2f%%, bestTestmAP %2.2f%%\n"%(epoch,total_epoch, lr_ini, loss,testLoss, mAPs[-1], max(mAPs)))
+            scoreFile.write("epoch %d, %d total epochs, LR %f, TRAINLOSS %f, TESTLOSS %f, testACC %2.2f%%, testmAP %2.2f%%, bestTestmAP %2.2f%%\n"%(epoch,total_epoch, lr_ini, loss,testLoss, testACC, mAPs[-1], max(mAPs)))
             scoreFile.flush()
 
         if epoch >= args.maxEpoch:
+            scoreFile.write("\n")
+            scoreFile.flush()
             quit()
 
         epoch += 1
