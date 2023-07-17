@@ -22,6 +22,8 @@ class Screen(tk.Frame):
         # Creating VLC player
         self.instance = vlc.Instance()
         self.player = self.instance.media_player_new()
+        self.media = None
+        
 
     def GetHandle(self):
         # Getting frame ID
@@ -29,16 +31,39 @@ class Screen(tk.Frame):
 
     def play(self, _source):
         # Function to start player from given source
-        Media = self.instance.media_new(_source)
-        Media.get_mrl()
-        self.player.set_media(Media)
+        self.media = self.instance.media_new(_source)
+        self.media.get_mrl()
+        self.player.set_media(self.media)
 
-        
         self.player.set_hwnd(self.winfo_id())
         self.player.play()
     
     def stop(self):
         self.player.stop()
+
+    def forward(self, seconds):
+        #Maxes out at the video length
+        newTime = min(self.player.get_time() + seconds*1000, self.media.get_duration())
+        self.player.set_time(newTime)
+
+    def backward(self, _source, seconds):
+        # If the video has ended a reset is needed, uses one second of margin
+        if self.player.get_time()+1000 >= self.media.get_duration(): 
+            # Reset the video
+            newTime = max(self.media.get_duration() - seconds*1000, 0)
+            self.media = self.instance.media_new(_source)
+            self.media.get_mrl()
+            self.player.set_media(self.media)
+            self.player.set_hwnd(self.winfo_id())
+            self.player.play()
+            
+            self.player.set_time(newTime)
+        else:
+            # Can't go back past the start
+            newTime = max(self.player.get_time() - seconds*1000, 0)
+            self.player.set_time(newTime)
+        
+
 
 
 class Loader():
@@ -104,7 +129,7 @@ class App(customtkinter.CTk):
         self.loader = Loader()
 
         # configure window
-        self.title("CREAR ESTO ME HA HECHO ENVEJECER 54 AÑOS")
+        self.title("APLICACIÓN DE ANOTACIÓN DE MUESTRAS")
         self.geometry(f"{1200}x{720}")
 
         # configure grid layout (4x4)
@@ -121,7 +146,7 @@ class App(customtkinter.CTk):
         self.player.place(relx=0.0005, rely=0, relwidth=0.999, relheight=1)
         self.player.play('temp2.mp4')
         
-
+        
 
         self.save_button = customtkinter.CTkButton(master=self, fg_color="transparent", border_width=2, text_color=("gray10", "#DCE4EE"), text="Save",command=self.saveSample)
         self.save_button.grid(row=7, column=1, padx=(20, 20), pady=(20, 20))
@@ -153,8 +178,18 @@ class App(customtkinter.CTk):
         self.textbox.insert("0.0", self.loader.df.iloc[self.loader.index]["transcription"])
         self.player.play('temp2.mp4')
 
+    def fun(self, event):
+        if event.keysym=='F1':
+            self.player.play('temp2.mp4')
+        if event.keysym=='F2':
+            self.player.backward('temp2.mp4',1)
+        if event.keysym=='F3':
+            self.player.forward(1)
+
+
 
 
 if __name__ == "__main__":
     app = App()
+    app.bind("<KeyPress>", app.fun)
     app.mainloop()
