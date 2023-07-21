@@ -92,7 +92,7 @@ class talkNet(nn.Module):
         precision_eval = 100 * (top1/index)
         print("TESTACC:",precision_eval)
 
-        df = pd.read_csv("testSamples.csv")
+        df = pd.read_csv("devSamples.csv")
         df = df.loc[df.index.repeat(windowSize)].reset_index(drop=True)
         df["pred"] = predLabels
         df["posScore"] = predScores
@@ -100,7 +100,9 @@ class talkNet(nn.Module):
         df.to_csv("testPreds.csv")
 
         cmd = "python -O get_map.py -p testPreds.csv"
-        mAP = float(str(subprocess.check_output(cmd)).split(' ')[2][:5])
+        mAP = str(subprocess.check_output(cmd)).split(' ')[2][:5]
+        if mAP[-1] == "%": mAP = mAP[:-1]
+        mAP = float(mAP)
         return loss/num, precision_eval, mAP
 
 

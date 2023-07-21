@@ -12,7 +12,7 @@ def main():
 
     parser = argparse.ArgumentParser(description = "TalkNet Training")
     # Training details
-    parser.add_argument('--lr',           type=float, default=0.000004,help='Learning rate')
+    parser.add_argument('--lr',           type=float, default=0.0001,help='Learning rate') #0.0001
     parser.add_argument('--lrDecay',      type=float, default=0.95,  help='Learning rate decay rate')
     parser.add_argument('--maxEpoch',     type=int,   default=10,    help='Maximum number of epochs')
     parser.add_argument('--testInterval', type=int,   default=1,     help='Test and save every [testInterval] epochs')
@@ -44,7 +44,7 @@ def main():
     videoDir = "C:/Users/jmmol/Desktop/COSAS V7/TFM/npz"
     audioDir = "C:/Users/jmmol/Desktop/COSAS V7/TFM/mfccs"
     datasetTrain = MyDataset(int(args.windowSize),videoDir,audioDir,"trainSamples.csv")
-    datasetTest = MyDataset(int(args.windowSize),videoDir,audioDir,"testSamples.csv")
+    datasetTest = MyDataset(int(args.windowSize),videoDir,audioDir,"devSamples.csv")
     
 
     trainLoader = DataLoader(dataset=datasetTrain,shuffle=True,batch_size=32,num_workers=14) #Cambiar num_workers

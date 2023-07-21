@@ -1,1 +1,187 @@
-epoch 2, 10 total epochs, LR 0.000004, TRAINLOSS 2.660708, TESTLOSS 2.660708, testACC 56.65%, testmAP 39.53%, bestTestmAP 39.53%
+epoch 2, 10 total epochs, LR 0.100000, TRAINLOSS 1.344156, TESTLOSS nan, testACC 50.08%, testmAP 0.00%, bestTestmAP 0.00%
+
+
+epoch 2, 10 total epochs, LR 0.010000, TRAINLOSS 1.253556, TESTLOSS 1.249978, testACC 49.92%, testmAP 51.65%, bestTestmAP 51.65%
+epoch 3, 10 total epochs, LR 0.010000, TRAINLOSS 1.250595, TESTLOSS 1.249592, testACC 49.92%, testmAP 50.36%, bestTestmAP 51.65%
+epoch 4, 10 total epochs, LR 0.010000, TRAINLOSS 1.251152, TESTLOSS 1.249324, testACC 50.08%, testmAP 0.00%, bestTestmAP 51.65%
+epoch 5, 10 total epochs, LR 0.010000, TRAINLOSS 1.250141, TESTLOSS 1.249241, testACC 49.92%, testmAP 50.36%, bestTestmAP 51.65%
+epoch 6, 10 total epochs, LR 0.010000, TRAINLOSS 1.250076, TESTLOSS 1.251812, testACC 50.08%, testmAP 0.00%, bestTestmAP 51.65%
+epoch 7, 10 total epochs, LR 0.010000, TRAINLOSS 1.249662, TESTLOSS 1.249128, testACC 50.08%, testmAP 0.00%, bestTestmAP 51.65%
+epoch 8, 10 total epochs, LR 0.010000, TRAINLOSS 1.250031, TESTLOSS 1.249148, testACC 50.08%, testmAP 0.00%, bestTestmAP 51.65%
+epoch 9, 10 total epochs, LR 0.010000, TRAINLOSS 1.249875, TESTLOSS 1.249331, testACC 49.92%, testmAP 50.36%, bestTestmAP 51.65%
+epoch 10, 10 total epochs, LR 0.010000, TRAINLOSS 1.248994, TESTLOSS 1.252116, testACC 49.92%, testmAP 50.36%, bestTestmAP 51.65%
+
+epoch 2, 10 total epochs, LR 0.001000, TRAINLOSS 0.874026, TESTLOSS 0.814936, testACC 76.29%, testmAP 81.51%, bestTestmAP 81.51%
+epoch 3, 10 total epochs, LR 0.001000, TRAINLOSS 0.830700, TESTLOSS 1.175502, testACC 75.23%, testmAP 76.95%, bestTestmAP 81.51%
+epoch 4, 10 total epochs, LR 0.001000, TRAINLOSS 0.823309, TESTLOSS 0.803019, testACC 76.51%, testmAP 81.52%, bestTestmAP 81.52%
+epoch 5, 10 total epochs, LR 0.001000, TRAINLOSS 0.815076, TESTLOSS 0.773817, testACC 77.06%, testmAP 82.86%, bestTestmAP 82.86%
+epoch 6, 10 total epochs, LR 0.001000, TRAINLOSS 0.813026, TESTLOSS 0.774585, testACC 77.13%, testmAP 83.34%, bestTestmAP 83.34%
+epoch 7, 10 total epochs, LR 0.001000, TRAINLOSS 0.810048, TESTLOSS 0.772612, testACC 77.01%, testmAP 82.91%, bestTestmAP 83.34%
+epoch 8, 10 total epochs, LR 0.001000, TRAINLOSS 0.807043, TESTLOSS 0.758371, testACC 78.29%, testmAP 83.91%, bestTestmAP 83.91%
+epoch 9, 10 total epochs, LR 0.001000, TRAINLOSS 0.783011, TESTLOSS 0.750722, testACC 78.44%, testmAP 84.37%, bestTestmAP 84.37%
+epoch 10, 10 total epochs, LR 0.001000, TRAINLOSS 0.779707, TESTLOSS 0.743638, testACC 78.42%, testmAP 84.73%, bestTestmAP 84.73%
+
+epoch 2, 10 total epochs, LR 0.000100, TRAINLOSS 0.528579, TESTLOSS 0.696404, testACC 87.53%, testmAP 79.56%, bestTestmAP 79.56%
+epoch 3, 10 total epochs, LR 0.000100, TRAINLOSS 0.278022, TESTLOSS 0.667679, testACC 88.76%, testmAP 81.45%, bestTestmAP 81.45% ---
+epoch 4, 10 total epochs, LR 0.000100, TRAINLOSS 0.203081, TESTLOSS 0.755855, testACC 88.82%, testmAP 80.05%, bestTestmAP 81.45%
+epoch 5, 10 total epochs, LR 0.000100, TRAINLOSS 0.165358, TESTLOSS 0.796171, testACC 88.14%, testmAP 79.23%, bestTestmAP 81.45%
+epoch 6, 10 total epochs, LR 0.000100, TRAINLOSS 0.139863, TESTLOSS 1.019019, testACC 84.73%, testmAP 70.84%, bestTestmAP 81.45%
+epoch 7, 10 total epochs, LR 0.000100, TRAINLOSS 0.121404, TESTLOSS 1.004142, testACC 86.47%, testmAP 74.30%, bestTestmAP 81.45%
+epoch 8, 10 total epochs, LR 0.000100, TRAINLOSS 0.107306, TESTLOSS 1.130297, testACC 85.82%, testmAP 72.79%, bestTestmAP 81.45%
+epoch 9, 10 total epochs, LR 0.000100, TRAINLOSS 0.096114, TESTLOSS 1.035378, testACC 86.58%, testmAP 74.67%, bestTestmAP 81.45%
+epoch 10, 10 total epochs, LR 0.000100, TRAINLOSS 0.088958, TESTLOSS 1.246200, testACC 84.08%, testmAP 69.25%, bestTestmAP 81.45%
+
+epoch 2, 10 total epochs, LR 0.000010, TRAINLOSS 0.933573, TESTLOSS 0.774360, testACC 82.41%, testmAP 77.72%, bestTestmAP 77.72%
+epoch 3, 10 total epochs, LR 0.000010, TRAINLOSS 0.632203, TESTLOSS 0.719404, testACC 84.87%, testmAP 80.34%, bestTestmAP 80.34%
+epoch 4, 10 total epochs, LR 0.000010, TRAINLOSS 0.526274, TESTLOSS 0.711817, testACC 85.66%, testmAP 80.10%, bestTestmAP 80.34%
+epoch 5, 10 total epochs, LR 0.000010, TRAINLOSS 0.464740, TESTLOSS 0.787789, testACC 84.76%, testmAP 75.22%, bestTestmAP 80.34%
+epoch 6, 10 total epochs, LR 0.000010, TRAINLOSS 0.412718, TESTLOSS 0.857867, testACC 84.00%, testmAP 72.65%, bestTestmAP 80.34%
+epoch 7, 10 total epochs, LR 0.000010, TRAINLOSS 0.377106, TESTLOSS 1.005220, testACC 82.14%, testmAP 67.93%, bestTestmAP 80.34%
+epoch 8, 10 total epochs, LR 0.000010, TRAINLOSS 0.348505, TESTLOSS 1.027084, testACC 82.88%, testmAP 69.24%, bestTestmAP 80.34%
+epoch 9, 10 total epochs, LR 0.000010, TRAINLOSS 0.326882, TESTLOSS 1.086072, testACC 82.31%, testmAP 67.07%, bestTestmAP 80.34%
+epoch 10, 10 total epochs, LR 0.000010, TRAINLOSS 0.306847, TESTLOSS 1.206923, testACC 80.86%, testmAP 64.12%, bestTestmAP 80.34%
+
+epoch 2, 10 total epochs, LR 0.000005, TRAINLOSS 1.068166, TESTLOSS 0.860570, testACC 79.24%, testmAP 75.74%, bestTestmAP 75.74%
+epoch 3, 10 total epochs, LR 0.000005, TRAINLOSS 0.770336, TESTLOSS 0.765013, testACC 83.16%, testmAP 79.50%, bestTestmAP 79.50%
+epoch 4, 10 total epochs, LR 0.000005, TRAINLOSS 0.650913, TESTLOSS 0.755707, testACC 83.81%, testmAP 78.09%, bestTestmAP 79.50%
+epoch 5, 10 total epochs, LR 0.000005, TRAINLOSS 0.592877, TESTLOSS 0.732481, testACC 84.46%, testmAP 77.99%, bestTestmAP 79.50%
+epoch 6, 10 total epochs, LR 0.000005, TRAINLOSS 0.541864, TESTLOSS 0.767044, testACC 84.40%, testmAP 76.50%, bestTestmAP 79.50%
+epoch 7, 10 total epochs, LR 0.000005, TRAINLOSS 0.505466, TESTLOSS 0.741983, testACC 84.99%, testmAP 77.84%, bestTestmAP 79.50%
+epoch 8, 10 total epochs, LR 0.000005, TRAINLOSS 0.473897, TESTLOSS 0.734506, testACC 85.54%, testmAP 78.76%, bestTestmAP 79.50%
+epoch 9, 10 total epochs, LR 0.000005, TRAINLOSS 0.450411, TESTLOSS 0.815844, testACC 84.27%, testmAP 73.75%, bestTestmAP 79.50%
+epoch 10, 10 total epochs, LR 0.000005, TRAINLOSS 0.427811, TESTLOSS 0.809202, testACC 84.87%, testmAP 75.96%, bestTestmAP 79.50%
+
+epoch 2, 10 total epochs, LR 0.000001, TRAINLOSS 1.388204, TESTLOSS 1.130985, testACC 67.75%, testmAP 56.57%, bestTestmAP 56.57%
+epoch 3, 10 total epochs, LR 0.000001, TRAINLOSS 1.075745, TESTLOSS 0.995915, testACC 74.71%, testmAP 71.03%, bestTestmAP 71.03%
+epoch 4, 10 total epochs, LR 0.000001, TRAINLOSS 0.990013, TESTLOSS 0.937099, testACC 76.81%, testmAP 74.51%, bestTestmAP 74.51%
+epoch 5, 10 total epochs, LR 0.000001, TRAINLOSS 0.938802, TESTLOSS 0.894418, testACC 78.01%, testmAP 77.06%, bestTestmAP 77.06%
+epoch 6, 10 total epochs, LR 0.000001, TRAINLOSS 0.898038, TESTLOSS 0.863961, testACC 79.20%, testmAP 77.28%, bestTestmAP 77.28%
+epoch 7, 10 total epochs, LR 0.000001, TRAINLOSS 0.854029, TESTLOSS 0.847680, testACC 79.90%, testmAP 76.73%, bestTestmAP 77.28%
+epoch 8, 10 total epochs, LR 0.000001, TRAINLOSS 0.818654, TESTLOSS 0.822607, testACC 80.97%, testmAP 76.65%, bestTestmAP 77.28%
+epoch 9, 10 total epochs, LR 0.000001, TRAINLOSS 0.786325, TESTLOSS 0.806517, testACC 81.22%, testmAP 76.65%, bestTestmAP 77.28%
+epoch 10, 10 total epochs, LR 0.000001, TRAINLOSS 0.759928, TESTLOSS 0.795185, testACC 81.80%, testmAP 77.51%, bestTestmAP 77.51%
+
+--------------------------------------------------------
+epoch 2, 10 total epochs, LR 0.001000, TRAINLOSS 0.869477, TESTLOSS 0.753409, testACC 78.32%, testmAP 84.20%, bestTestmAP 84.20%
+epoch 3, 10 total epochs, LR 0.001000, TRAINLOSS 0.842136, TESTLOSS 0.787793, testACC 77.83%, testmAP 83.60%, bestTestmAP 83.60%
+epoch 4, 10 total epochs, LR 0.001000, TRAINLOSS 0.812681, TESTLOSS 0.748379, testACC 78.42%, testmAP 84.61%, bestTestmAP 84.61%
+epoch 5, 10 total epochs, LR 0.001000, TRAINLOSS 0.799272, TESTLOSS 0.740989, testACC 78.61%, testmAP 84.82%, bestTestmAP 84.82%
+epoch 6, 10 total epochs, LR 0.001000, TRAINLOSS 0.809281, TESTLOSS 0.792524, testACC 77.27%, testmAP 82.43%, bestTestmAP 84.82%
+epoch 7, 10 total epochs, LR 0.001000, TRAINLOSS 0.795966, TESTLOSS 0.748466, testACC 78.47%, testmAP 84.37%, bestTestmAP 84.82%
+epoch 8, 10 total epochs, LR 0.001000, TRAINLOSS 0.785590, TESTLOSS 0.732833, testACC 78.48%, testmAP 85.26%, bestTestmAP 85.26%
+epoch 9, 10 total epochs, LR 0.001000, TRAINLOSS 0.784229, TESTLOSS 0.921700, testACC 72.58%, testmAP 67.60%, bestTestmAP 85.26%
+epoch 10, 10 total epochs, LR 0.001000, TRAINLOSS 0.773251, TESTLOSS 0.731008, testACC 78.71%, testmAP 85.20%, bestTestmAP 85.26
+
+epoch 2, 10 total epochs, LR 0.000500, TRAINLOSS 0.530755, TESTLOSS 0.579386, testACC 89.91%, testmAP 84.07%, bestTestmAP 84.07%
+epoch 3, 10 total epochs, LR 0.000500, TRAINLOSS 0.276163, TESTLOSS 0.613117, testACC 89.99%, testmAP 83.28%, bestTestmAP 84.07%
+epoch 4, 10 total epochs, LR 0.000500, TRAINLOSS 0.205881, TESTLOSS 0.610948, testACC 90.41%, testmAP 84.41%, bestTestmAP 84.41%
+epoch 5, 10 total epochs, LR 0.000500, TRAINLOSS 0.164795, TESTLOSS 0.689937, testACC 90.30%, testmAP 83.10%, bestTestmAP 84.41%
+epoch 6, 10 total epochs, LR 0.000500, TRAINLOSS 0.142918, TESTLOSS 0.629634, testACC 90.78%, testmAP 83.77%, bestTestmAP 84.41%
+epoch 7, 10 total epochs, LR 0.000500, TRAINLOSS 0.125292, TESTLOSS 0.683693, testACC 89.68%, testmAP 80.86%, bestTestmAP 84.41%
+epoch 8, 10 total epochs, LR 0.000500, TRAINLOSS 0.110154, TESTLOSS 0.815771, testACC 89.37%, testmAP 80.08%, bestTestmAP 84.41%
+epoch 9, 10 total epochs, LR 0.000500, TRAINLOSS 0.098132, TESTLOSS 1.000688, testACC 86.61%, testmAP 74.33%, bestTestmAP 84.41%
+epoch 10, 10 total epochs, LR 0.000500, TRAINLOSS 0.088466, TESTLOSS 1.088456, testACC 86.31%, testmAP 73.46%, bestTestmAP 84.41%
+
+epoch 2, 10 total epochs, LR 0.000100, TRAINLOSS 0.557560, TESTLOSS 0.594722, testACC 88.40%, testmAP 79.74%, bestTestmAP 79.74%
+epoch 3, 10 total epochs, LR 0.000100, TRAINLOSS 0.325335, TESTLOSS 0.514034, testACC 91.08%, testmAP 85.00%, bestTestmAP 85.00%
+epoch 4, 10 total epochs, LR 0.000100, TRAINLOSS 0.236802, TESTLOSS 0.613842, testACC 89.82%, testmAP 82.34%, bestTestmAP 85.00%
+epoch 5, 10 total epochs, LR 0.000100, TRAINLOSS 0.189593, TESTLOSS 0.503809, testACC 91.44%, testmAP 87.31%, bestTestmAP 87.31%
+epoch 6, 10 total epochs, LR 0.000100, TRAINLOSS 0.159880, TESTLOSS 0.467966, testACC 91.96%, testmAP 87.54%, bestTestmAP 87.54%
+epoch 7, 10 total epochs, LR 0.000100, TRAINLOSS 0.136475, TESTLOSS 0.555197, testACC 91.80%, testmAP 87.04%, bestTestmAP 87.54%
+epoch 8, 10 total epochs, LR 0.000100, TRAINLOSS 0.125148, TESTLOSS 0.675886, testACC 89.94%, testmAP 81.61%, bestTestmAP 87.54%
+epoch 9, 10 total epochs, LR 0.000100, TRAINLOSS 0.109236, TESTLOSS 0.550329, testACC 91.22%, testmAP 84.36%, bestTestmAP 87.54%
+epoch 10, 10 total epochs, LR 0.000100, TRAINLOSS 0.098289, TESTLOSS 0.608825, testACC 90.90%, testmAP 83.34%, bestTestmAP 87.54%
+
+epoch 2, 10 total epochs, LR 0.000050, TRAINLOSS 0.618498, TESTLOSS 0.570711, testACC 89.33%, testmAP 83.63%, bestTestmAP 83.63%
+epoch 3, 10 total epochs, LR 0.000050, TRAINLOSS 0.342085, TESTLOSS 0.582086, testACC 89.63%, testmAP 82.32%, bestTestmAP 83.63%
+epoch 4, 10 total epochs, LR 0.000050, TRAINLOSS 0.254985, TESTLOSS 0.770664, testACC 86.92%, testmAP 75.71%, bestTestmAP 83.63%
+epoch 5, 10 total epochs, LR 0.000050, TRAINLOSS 0.200628, TESTLOSS 0.747715, testACC 88.12%, testmAP 78.06%, bestTestmAP 83.63%
+epoch 6, 10 total epochs, LR 0.000050, TRAINLOSS 0.166790, TESTLOSS 0.804468, testACC 87.23%, testmAP 76.03%, bestTestmAP 83.63%
+epoch 7, 10 total epochs, LR 0.000050, TRAINLOSS 0.147593, TESTLOSS 1.278212, testACC 81.55%, testmAP 63.81%, bestTestmAP 83.63%
+epoch 8, 10 total epochs, LR 0.000050, TRAINLOSS 0.130543, TESTLOSS 0.958394, testACC 85.73%, testmAP 72.42%, bestTestmAP 83.63%
+epoch 9, 10 total epochs, LR 0.000050, TRAINLOSS 0.116771, TESTLOSS 0.935072, testACC 87.18%, testmAP 75.99%, bestTestmAP 83.63%
+epoch 10, 10 total epochs, LR 0.000050, TRAINLOSS 0.105279, TESTLOSS 1.108273, testACC 85.18%, testmAP 71.19%, bestTestmAP 83.63%
+
+epoch 2, 10 total epochs, LR 0.000010, TRAINLOSS 0.921715, TESTLOSS 0.723802, testACC 85.17%, testmAP 80.08%, bestTestmAP 80.08%
+epoch 3, 10 total epochs, LR 0.000010, TRAINLOSS 0.625184, TESTLOSS 0.639078, testACC 87.72%, testmAP 86.11%, bestTestmAP 86.11%
+epoch 4, 10 total epochs, LR 0.000010, TRAINLOSS 0.518776, TESTLOSS 0.656039, testACC 87.64%, testmAP 81.05%, bestTestmAP 86.11%
+epoch 5, 10 total epochs, LR 0.000010, TRAINLOSS 0.450696, TESTLOSS 0.672111, testACC 87.68%, testmAP 80.31%, bestTestmAP 86.11%
+epoch 6, 10 total epochs, LR 0.000010, TRAINLOSS 0.403313, TESTLOSS 0.675735, testACC 87.52%, testmAP 79.60%, bestTestmAP 86.11%
+epoch 7, 10 total epochs, LR 0.000010, TRAINLOSS 0.367677, TESTLOSS 0.740773, testACC 86.63%, testmAP 76.89%, bestTestmAP 86.11%
+epoch 8, 10 total epochs, LR 0.000010, TRAINLOSS 0.342059, TESTLOSS 0.752407, testACC 87.13%, testmAP 77.78%, bestTestmAP 86.11%
+epoch 9, 10 total epochs, LR 0.000010, TRAINLOSS 0.316941, TESTLOSS 0.821583, testACC 86.19%, testmAP 75.29%, bestTestmAP 86.11%
+epoch 10, 10 total epochs, LR 0.000010, TRAINLOSS 0.297851, TESTLOSS 1.002415, testACC 83.74%, testmAP 69.60%, bestTestmAP 86.11%
+
+epoch 2, 10 total epochs, LR 0.000001, TRAINLOSS 1.388756, TESTLOSS 1.137333, testACC 67.62%, testmAP 57.29%, bestTestmAP 57.29%
+epoch 3, 10 total epochs, LR 0.000001, TRAINLOSS 1.077348, TESTLOSS 1.006078, testACC 73.89%, testmAP 68.84%, bestTestmAP 68.84%
+epoch 4, 10 total epochs, LR 0.000001, TRAINLOSS 0.990279, TESTLOSS 0.941949, testACC 76.53%, testmAP 74.34%, bestTestmAP 74.34%
+epoch 5, 10 total epochs, LR 0.000001, TRAINLOSS 0.939479, TESTLOSS 0.901129, testACC 77.62%, testmAP 77.08%, bestTestmAP 77.08%
+epoch 6, 10 total epochs, LR 0.000001, TRAINLOSS 0.900279, TESTLOSS 0.864079, testACC 79.11%, testmAP 78.03%, bestTestmAP 78.03%
+epoch 7, 10 total epochs, LR 0.000001, TRAINLOSS 0.860284, TESTLOSS 0.833965, testACC 80.70%, testmAP 78.88%, bestTestmAP 78.88%
+epoch 8, 10 total epochs, LR 0.000001, TRAINLOSS 0.824734, TESTLOSS 0.809336, testACC 81.64%, testmAP 79.86%, bestTestmAP 79.86%
+epoch 9, 10 total epochs, LR 0.000001, TRAINLOSS 0.794167, TESTLOSS 0.779639, testACC 82.85%, testmAP 80.93%, bestTestmAP 80.93%
+epoch 10, 10 total epochs, LR 0.000001, TRAINLOSS 0.764375, TESTLOSS 0.761931, testACC 83.42%, testmAP 81.36%, bestTestmAP 81.36%
+
+------------------------------------------------------------------
+
+epoch 2, 6 total epochs, LR 0.000100, TRAINLOSS 1.122851, TESTLOSS 1.111146, testACC 64.57%, testmAP 52.48%, bestTestmAP 52.48%
+epoch 3, 6 total epochs, LR 0.000100, TRAINLOSS 0.956136, TESTLOSS 1.088862, testACC 66.75%, testmAP 58.68%, bestTestmAP 58.68%
+epoch 4, 6 total epochs, LR 0.000100, TRAINLOSS 0.877645, TESTLOSS 1.043150, testACC 69.40%, testmAP 60.06%, bestTestmAP 60.06%
+epoch 5, 6 total epochs, LR 0.000100, TRAINLOSS 0.821136, TESTLOSS 1.076865, testACC 69.61%, testmAP 55.89%, bestTestmAP 60.06%
+epoch 6, 6 total epochs, LR 0.000100, TRAINLOSS 0.771559, TESTLOSS 1.093132, testACC 70.24%, testmAP 59.73%, bestTestmAP 60.06%
+
+epoch 2, 6 total epochs, LR 0.000100, TRAINLOSS 0.934745, TESTLOSS 0.901580, testACC 75.18%, testmAP 70.84%, bestTestmAP 70.84%
+epoch 3, 6 total epochs, LR 0.000100, TRAINLOSS 0.696515, TESTLOSS 0.914169, testACC 76.78%, testmAP 65.28%, bestTestmAP 70.84%
+epoch 4, 6 total epochs, LR 0.000100, TRAINLOSS 0.601478, TESTLOSS 0.865851, testACC 78.72%, testmAP 72.04%, bestTestmAP 72.04%
+epoch 5, 6 total epochs, LR 0.000100, TRAINLOSS 0.528359, TESTLOSS 0.966480, testACC 78.09%, testmAP 66.97%, bestTestmAP 72.04%
+epoch 6, 6 total epochs, LR 0.000100, TRAINLOSS 0.472920, TESTLOSS 0.933929, testACC 79.24%, testmAP 69.92%, bestTestmAP 72.04%
+
+epoch 2, 6 total epochs, LR 0.000100, TRAINLOSS 0.835428, TESTLOSS 0.807402, testACC 80.40%, testmAP 70.44%, bestTestmAP 70.44%
+epoch 3, 6 total epochs, LR 0.000100, TRAINLOSS 0.528970, TESTLOSS 0.744933, testACC 83.52%, testmAP 77.68%, bestTestmAP 77.68%
+epoch 4, 6 total epochs, LR 0.000100, TRAINLOSS 0.406180, TESTLOSS 0.796761, testACC 82.78%, testmAP 72.34%, bestTestmAP 77.68%
+epoch 5, 6 total epochs, LR 0.000100, TRAINLOSS 0.341667, TESTLOSS 0.931165, testACC 82.63%, testmAP 70.52%, bestTestmAP 77.68%
+epoch 6, 6 total epochs, LR 0.000100, TRAINLOSS 0.293958, TESTLOSS 0.862789, testACC 83.51%, testmAP 72.86%, bestTestmAP 77.68%
+
+epoch 2, 6 total epochs, LR 0.000100, TRAINLOSS 0.677436, TESTLOSS 0.732219, testACC 84.25%, testmAP 77.62%, bestTestmAP 77.62%
+epoch 3, 6 total epochs, LR 0.000100, TRAINLOSS 0.403164, TESTLOSS 0.720650, testACC 85.15%, testmAP 77.87%, bestTestmAP 77.87%
+epoch 4, 6 total epochs, LR 0.000100, TRAINLOSS 0.325266, TESTLOSS 0.821640, testACC 84.24%, testmAP 73.41%, bestTestmAP 77.87%
+epoch 5, 6 total epochs, LR 0.000100, TRAINLOSS 0.267975, TESTLOSS 0.890608, testACC 84.46%, testmAP 72.93%, bestTestmAP 77.87%
+epoch 6, 6 total epochs, LR 0.000100, TRAINLOSS 0.229529, TESTLOSS 0.843789, testACC 85.71%, testmAP 76.04%, bestTestmAP 77.87%
+
+epoch 2, 6 total epochs, LR 0.000100, TRAINLOSS 0.611820, TESTLOSS 0.602403, testACC 88.89%, testmAP 85.21%, bestTestmAP 85.21%
+epoch 3, 6 total epochs, LR 0.000100, TRAINLOSS 0.333979, TESTLOSS 0.578247, testACC 89.65%, testmAP 84.27%, bestTestmAP 85.21%
+epoch 4, 6 total epochs, LR 0.000100, TRAINLOSS 0.245065, TESTLOSS 0.732385, testACC 88.19%, testmAP 79.70%, bestTestmAP 85.21%
+epoch 5, 6 total epochs, LR 0.000100, TRAINLOSS 0.200200, TESTLOSS 0.588660, testACC 89.90%, testmAP 84.59%, bestTestmAP 85.21%
+epoch 6, 6 total epochs, LR 0.000100, TRAINLOSS 0.169232, TESTLOSS 0.792300, testACC 88.18%, testmAP 80.00%, bestTestmAP 85.21%
+
+epoch 2, 6 total epochs, LR 0.000100, TRAINLOSS 0.433684, TESTLOSS 0.400822, testACC 94.05%, testmAP 90.70%, bestTestmAP 90.70%
+epoch 3, 6 total epochs, LR 0.000100, TRAINLOSS 0.215664, TESTLOSS 0.467248, testACC 91.66%, testmAP 85.36%, bestTestmAP 90.70%
+epoch 4, 6 total epochs, LR 0.000100, TRAINLOSS 0.154428, TESTLOSS 0.505567, testACC 92.52%, testmAP 85.99%, bestTestmAP 90.70%
+epoch 5, 6 total epochs, LR 0.000100, TRAINLOSS 0.123824, TESTLOSS 0.564244, testACC 93.11%, testmAP 87.17%, bestTestmAP 90.70%
+epoch 6, 6 total epochs, LR 0.000100, TRAINLOSS 0.101223, TESTLOSS 0.544285, testACC 92.10%, testmAP 84.99%, bestTestmAP 90.70%
+
+epoch 2, 6 total epochs, LR 0.000100, TRAINLOSS 0.367746, TESTLOSS 0.342906, testACC 94.78%, testmAP 90.78%, bestTestmAP 90.78%
+epoch 3, 6 total epochs, LR 0.000100, TRAINLOSS 0.192421, TESTLOSS 0.285273, testACC 96.45%, testmAP 94.33%, bestTestmAP 94.33%
+epoch 4, 6 total epochs, LR 0.000100, TRAINLOSS 0.134799, TESTLOSS 0.275453, testACC 97.08%, testmAP 95.77%, bestTestmAP 95.77%
+epoch 5, 6 total epochs, LR 0.000100, TRAINLOSS 0.105304, TESTLOSS 0.454987, testACC 93.86%, testmAP 88.19%, bestTestmAP 95.77%
+epoch 6, 6 total epochs, LR 0.000100, TRAINLOSS 0.091185, TESTLOSS 0.400194, testACC 94.37%, testmAP 89.15%, bestTestmAP 95.77%
+
+epoch 2, 6 total epochs, LR 0.000100, TRAINLOSS 0.355808, TESTLOSS 0.316957, testACC 96.11%, testmAP 93.42%, bestTestmAP 93.42%
+epoch 3, 6 total epochs, LR 0.000100, TRAINLOSS 0.184403, TESTLOSS 0.382846, testACC 94.32%, testmAP 89.03%, bestTestmAP 93.42%
+epoch 4, 6 total epochs, LR 0.000100, TRAINLOSS 0.132709, TESTLOSS 0.270297, testACC 97.03%, testmAP 94.79%, bestTestmAP 94.79%
+epoch 5, 6 total epochs, LR 0.000100, TRAINLOSS 0.097885, TESTLOSS 0.530063, testACC 93.16%, testmAP 86.52%, bestTestmAP 94.79%
+epoch 6, 6 total epochs, LR 0.000100, TRAINLOSS 0.078649, TESTLOSS 0.352423, testACC 94.95%, testmAP 90.06%, bestTestmAP 94.79%
+
+---------------------------------
+Sin fine-tuning
+epoch 1, 10 total epochs, LR 0.000100, TRAINLOSS 0.747671, TESTLOSS 0.648448, testACC 87.37%, testmAP 81.16%, bestTestmAP 81.16%
+epoch 2, 10 total epochs, LR 0.000100, TRAINLOSS 0.395663, TESTLOSS 0.636607, testACC 88.26%, testmAP 80.77%, bestTestmAP 81.16%
+epoch 3, 10 total epochs, LR 0.000100, TRAINLOSS 0.269399, TESTLOSS 0.677271, testACC 88.02%, testmAP 78.92%, bestTestmAP 81.16%
+epoch 4, 10 total epochs, LR 0.000100, TRAINLOSS 0.208187, TESTLOSS 0.666718, testACC 88.84%, testmAP 79.87%, bestTestmAP 81.16%
+epoch 5, 10 total epochs, LR 0.000100, TRAINLOSS 0.170925, TESTLOSS 0.709995, testACC 89.28%, testmAP 80.73%, bestTestmAP 81.16%
+epoch 6, 10 total epochs, LR 0.000100, TRAINLOSS 0.148651, TESTLOSS 0.904027, testACC 87.11%, testmAP 75.75%, bestTestmAP 81.16%
+epoch 7, 10 total epochs, LR 0.000100, TRAINLOSS 0.129786, TESTLOSS 0.709938, testACC 89.19%, testmAP 81.79%, bestTestmAP 81.79%
+epoch 8, 10 total epochs, LR 0.000100, TRAINLOSS 0.115206, TESTLOSS 0.773360, testACC 88.76%, testmAP 80.50%, bestTestmAP 81.79%
+epoch 9, 10 total epochs, LR 0.000100, TRAINLOSS 0.104743, TESTLOSS 0.820185, testACC 87.62%, testmAP 76.35%, bestTestmAP 81.79%
+epoch 10, 10 total epochs, LR 0.000100, TRAINLOSS 0.095580, TESTLOSS 0.781388, testACC 89.08%, testmAP 80.24%, bestTestmAP 81.79%
+

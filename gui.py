@@ -24,6 +24,7 @@ class Screen(tk.Frame):
         self.player = self.instance.media_player_new()
         self.media = None
         
+        
 
     def GetHandle(self):
         # Getting frame ID
@@ -40,6 +41,17 @@ class Screen(tk.Frame):
     
     def stop(self):
         self.player.stop()
+
+    def playpause(self):
+        print(self.player.is_playing())
+        #print(self.player.get_position())
+        self.player.pause()
+
+        if self.player.get_length() - 350 < self.player.get_time():
+            self.player.set_media(self.media)
+            self.player.set_hwnd(self.winfo_id())
+            self.player.play()
+        
 
     def forward(self, seconds):
         #Maxes out at the video length
@@ -161,6 +173,9 @@ class App(customtkinter.CTk):
         self.textbox = customtkinter.CTkTextbox(self, width=250)
         self.textbox.grid(row=4, column=1, padx=(20, 0), pady=(20, 0), sticky="nsew")
 
+        self.label = customtkinter.CTkLabel(master=self, text="F1 - Play/Pause \n F2 - Rewind 5s \n F3 - Forward 5s")
+        self.label.grid(row=4, column=2, padx=(20, 0), pady=(20, 0), sticky="nsew")
+
         # set default values
         #self.appearance_mode_optionemenu.set("Dark")
         #self.textbox.insert("0.0", "---Video transcription---")
@@ -180,7 +195,7 @@ class App(customtkinter.CTk):
 
     def fun(self, event):
         if event.keysym=='F1':
-            self.player.play('temp2.mp4')
+            self.player.playpause()
         if event.keysym=='F2':
             self.player.backward('temp2.mp4',1)
         if event.keysym=='F3':
