@@ -145,13 +145,14 @@ class App(customtkinter.CTk):
         self.geometry(f"{1200}x{720}")
 
         # configure grid layout (4x4)
-        self.grid_columnconfigure(1, weight=1)
-        self.grid_columnconfigure((2, 3), weight=0)
+        self.grid_columnconfigure(0, weight=1)
+        self.grid_columnconfigure((1, 2, 3,4), weight=1)
+        self.grid_columnconfigure(5, weight=0)
         self.grid_rowconfigure((0, 1, 2), weight=1)
 
         # Create videoFrame holder
         self.videoHolder = tk.Frame(self)
-        self.videoHolder.grid(row=0, column=1, padx=20, pady=(10, 10),sticky="nsew",rowspan=4)
+        self.videoHolder.grid(row=0, column=0, padx=(20,40), pady=(10, 10),sticky="nsew",rowspan=4, columnspan=5)
         # Init vlc player
         self.player = Screen(self.videoHolder)
         
@@ -160,21 +161,27 @@ class App(customtkinter.CTk):
         
         
 
-        self.save_button = customtkinter.CTkButton(master=self, fg_color="transparent", border_width=2, text_color=("gray10", "#DCE4EE"), text="Save",command=self.saveSample)
-        self.save_button.grid(row=7, column=1, padx=(20, 20), pady=(20, 20))
+        self.prev_button = customtkinter.CTkButton(master=self, fg_color="transparent", border_width=2, text_color=("gray10", "#DCE4EE"), text="Prev",command=self.saveSample)
+        self.prev_button.grid(row=7, column=2, padx=(20, 20), pady=(20, 20), sticky="e")
 
-        self.accept_button = customtkinter.CTkButton(master=self, fg_color="#adedbe", border_width=2, text_color=("gray10", "#DCE4EE"), text="Accept",command=self.saveSample)
-        self.accept_button.grid(row=0, column=2, padx=(20, 20))
+        self.next_button = customtkinter.CTkButton(master=self, fg_color="transparent", border_width=2, text_color=("gray10", "#DCE4EE"), text="Next",command=self.saveSample)
+        self.next_button.grid(row=7, column=3, padx=(20, 20), pady=(20, 20), sticky="w")
 
-        self.incorrect_button = customtkinter.CTkButton(master=self, fg_color="#edadad", border_width=2, text_color=("gray10", "#DCE4EE"), text="Incorrect",command=self.saveSample)
-        self.incorrect_button.grid(row=1, column=2, padx=(20, 20))
 
         # create textbox
         self.textbox = customtkinter.CTkTextbox(self, width=250)
-        self.textbox.grid(row=4, column=1, padx=(20, 0), pady=(20, 0), sticky="nsew")
+        self.textbox.grid(row=4, column=0, padx=(20, 20), pady=(20, 20), columnspan=5, sticky="nsew")
 
-        self.label = customtkinter.CTkLabel(master=self, text="F1 - Play/Pause \n F2 - Rewind 5s \n F3 - Forward 5s")
-        self.label.grid(row=4, column=2, padx=(20, 0), pady=(20, 0), sticky="nsew")
+        #Right side
+
+        self.accept_button = customtkinter.CTkButton(master=self, fg_color="#adedbe", border_width=2, text_color=("gray10", "#DCE4EE"), text="Accept",command=self.saveSample)
+        self.accept_button.grid(row=0, column=5, padx=(20, 20))
+
+        self.incorrect_button = customtkinter.CTkButton(master=self, fg_color="#edadad", border_width=2, text_color=("gray10", "#DCE4EE"), text="Incorrect",command=self.saveSample)
+        self.incorrect_button.grid(row=1, column=5, padx=(20, 20))
+
+        self.label = customtkinter.CTkLabel(master=self, text="F1 - Play/Pause \nF2 - Rewind 5s \nF3 - Forward 5s", justify="left")
+        self.label.grid(row=4, column=5, padx=(20, 20), pady=(20, 0), sticky="w")
 
         # set default values
         #self.appearance_mode_optionemenu.set("Dark")
