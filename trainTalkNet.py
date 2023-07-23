@@ -53,11 +53,13 @@ def main():
     total_epoch = args.maxEpoch
 
     if args.evaluation == True:
+        datasetTest = MyDataset(int(args.windowSize),videoDir,audioDir,"testSamples.csv")
+        testLoader = DataLoader(dataset=datasetTest,shuffle=False,batch_size=32,num_workers=14) #Cambiar num_workers
         s = talkNet(**vars(args))
-        s.loadParameters(r'C:\Users\jmmol\Desktop\COSAS V7\TFM\exps\exp2\model\model_0006.model')
+        s.loadParameters(r'C:\Users\jmmol\Desktop\COSAS V7\TFM\exps\exp2\model\model_0003.model')
         print("Model %s loaded from previous state!"%('pretrain_AVA.model'))
-        testLoss,mAP = s.evaluate_network(loader = valLoader, **vars(args))
-        print("Precision en val: %2.2f%%, y loss %f"%(mAP, testLoss))
+        testLoss, testACC, testmap = s.evaluate_network(loader = testLoader, **vars(args))
+        print("Loss en test: %2.2f%%, ACC %2.2f%%, mAP: %2.2f%%"%(testLoss, testACC, testmap))
         quit()
 
     modelfiles = glob.glob('%s/model_0*.model'%(args.savePath+"/model"))
