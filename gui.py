@@ -141,7 +141,7 @@ class App(customtkinter.CTk):
         self.loader = Loader()
 
         # configure window
-        self.title("APLICACIÓN DE ANOTACIÓN DE MUESTRAS")
+        self.title("AnnoTheia")
         self.geometry(f"{1200}x{720}")
 
         # configure grid layout (4x4)

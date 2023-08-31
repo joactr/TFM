@@ -1,3 +1,5 @@
 ,video,speaker,ini,end,dataPath,transcription
-0,inputs/dos_personas_hablando_por_turnos.mp4,1,0.4,5.48,outputs/npz/dos_personas_hablando_por_turnos.mp4.pkl, y la población civil de guta oriental en siria sigue sufriendo los efectos de la guerra.
-1,inputs/dos_personas_hablando_por_turnos.mp4,0,7,8.48,outputs/npz/dos_personas_hablando_por_turnos.mp4.pkl, consejo de seguridad de la onu
+0,C:/Users/jmmol/Desktop/LIP-RTVE/MP4s/speaker092/speaker092_0002.mp4,0,0.0,1.12,outputs/npz/speaker092_0002.mp4.pkl, es que había unha estrategia
+1,C:/Users/jmmol/Desktop/LIP-RTVE/MP4s/speaker092/speaker092_0002.mp4,1,0.0,1.4,outputs/npz/speaker092_0002.mp4.pkl, es que había unha estrategia
+2,C:/Users/jmmol/Desktop/LIP-RTVE/MP4s/speaker092/speaker092_0002.mp4,1,4.92,7.36,outputs/npz/speaker092_0002.mp4.pkl, golpe de estado institucional ao margen
+3,C:/Users/jmmol/Desktop/LIP-RTVE/MP4s/speaker092/speaker092_0002.mp4,2,0.0,1.04,outputs/npz/speaker092_0002.mp4.pkl, es que había unha
