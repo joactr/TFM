@@ -56,7 +56,7 @@ def main():
         datasetTest = MyDataset(int(args.windowSize),videoDir,audioDir,"testSamples.csv")
         testLoader = DataLoader(dataset=datasetTest,shuffle=False,batch_size=32,num_workers=14) #Cambiar num_workers
         s = talkNet(**vars(args))
-        s.loadParameters(r"C:\Users\jmmol\Desktop\COSAS V7\TFM\exps\exp1\model\model_01.model")
+        s.loadParameters(r"C:\Users\jmmol\Desktop\COSAS V7\TFM\exps\exp1\model\model13_0006.model")
         #s.loadParameters(r'C:\Users\jmmol\Desktop\COSAS V7\TFM\exps\exp1\model\model21_0005.model')
         print("Model %s loaded from previous state!"%('pretrain_AVA.model'))
         testLoss, testACC, testmap = s.evaluate_network(loader = testLoader, **vars(args))
