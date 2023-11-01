@@ -11,8 +11,10 @@ from collections import defaultdict
 
 def convert_video_to_audio_ffmpeg(video_file, output_ext="wav"):
     """Extracts audio from video to .wav format, returns path of the resulting audio"""
-    filename, ext = os.path.splitext(video_file)
-    filename = filename.split('/')[-1]
+    #filename, ext = os.path.splitext(video_file)
+    filename = os.path.basename(os.path.realpath(video_file))
+    filename = filename.split(r'/|\\')[-1]
+    print(filename)
     #Gets working directory and extracts audio
     subprocess.call(["ffmpeg","-y","-i",video_file,"-vn","-ac","1","-ar","16000","-acodec", "pcm_s16le",  os.getcwd()+f"/{filename}.{output_ext}"],
                     stdout=subprocess.DEVNULL,
