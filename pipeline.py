@@ -40,7 +40,6 @@ parser._action_groups.append(optional)
 parsed_args = parser.parse_args()
 args = vars(parsed_args)
 
-
 detector = face_detection.build_detector(
 "DSFDDetector", confidence_threshold=.3, nms_iou_threshold=.5) #DSFDDetector
 
